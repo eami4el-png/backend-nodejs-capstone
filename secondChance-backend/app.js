@@ -20,7 +20,7 @@ connectToDatabase().then(() => {
 
 app.use(express.json());
 
-// Route files
+// Route file
 const secondChanceRoutes = require('./routes/secondChanceItemsRoutes');
 const authRoutes = require('./routes/authRoutes');
 const searchRoutes = require('./routes/searchRoutes');
