@@ -11,7 +11,6 @@ dotenv.config();
 const logger = pino();
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Register endpoint
 router.post('/register', async (req, res) => {
     try {
         const db = await connectToDatabase();
@@ -49,7 +48,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login endpoint
 router.post('/login', async (req, res) => {
     try {
         const db = await connectToDatabase();
@@ -84,8 +82,9 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Update user endpoint
-router.put('/update', async (req, res) => {
+router.put('/update', [
+    body('name', 'Name is required').notEmpty(),
+], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         logger.error('Validation errors in update request', errors.array());
